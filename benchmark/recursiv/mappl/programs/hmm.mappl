@@ -1,0 +1,20 @@
+external type external_list
+
+external def sigma : Unit -> preal
+external def len : external_list -> nat
+external def head : external_list -> real
+external def tail : external_list -> external_list
+
+external def emit : bool -> nat 
+external def step : bool -> ureal 
+
+def hmm(z : bool, data: external_list) : Unit = {
+  if (len data) = 0 
+    then return unit 
+    else
+        observe (head data) from NORMAL(emit(z), 1);
+
+        z' = sample(BERN(step(z)));
+      hmm(z', tail(data))
+    end
+}
