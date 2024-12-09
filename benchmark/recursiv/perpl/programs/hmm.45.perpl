@@ -1,0 +1,36 @@
+
+data String = Nil | Cons Bool String;
+define observe: Bool -> Bool -> () = \cur. \obs.
+    if cur then
+        if obs then
+            factor 0.398942291736602783203125000000 in
+            ()
+        else
+            factor 0.000000000000000000000000000000 in
+            ()
+    else
+        if obs then
+            factor 0.000000000000000000000000000000 in
+            ()
+        else
+            factor 0.398942291736602783203125000000 in
+            ()
+;
+
+define transite: Bool -> Bool = \cur.
+    if cur then
+        amb (factor 0.8 in True) (factor 0.2 in False)
+    else
+        amb (factor 0.1 in True) (factor 0.9 in False)
+;
+
+define hmma: Bool -> String -> () = \cur. \obs.
+    case obs of 
+    | Nil -> ()
+    | Cons x xs -> 
+        let _ = (observe cur x) in
+        let nxt = (transite cur) in
+        hmma nxt xs
+;
+define obs =(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True(Cons True Nil)))))))))))))))))))))))))))))))))))))))))))));
+hmma True obs
